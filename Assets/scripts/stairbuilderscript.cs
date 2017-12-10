@@ -42,7 +42,7 @@ public class stairbuilderscript : MonoBehaviour {
 			// stupid comment insert for josh-experimental
 
 			// compute bar length based on bar # (e.g ranging in length from barSizeYMin to barSizeYMax units)
-			var barSizeZ = n * (barSizeZMax - barSizeZMin) / 37 + barSizeZMin;
+			var barSizeZ = n * (barSizeZMax - barSizeZMin) / 37.0f + barSizeZMin;
 
 			// create bar
 			GameObject barClone = Instantiate(bar);
