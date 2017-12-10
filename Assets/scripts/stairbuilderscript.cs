@@ -57,8 +57,8 @@ public class stairbuilderscript : MonoBehaviour {
 			// move the bar to this x,y,z location (if it Unity creates it at 0,0,0)
 			barClone.transform.localPosition = new Vector3(xPos * scaleFactor, yPos * scaleFactor, zPos * scaleFactor);
 
-			// *** you may need to change the rotation plane
-			barClone.transform.Rotate(0.0f, (Mathf.Atan2(yPos, xPos) * 180.0f / 3.1415926535f), 0.0f,  Space.World);
+			// ERIC this seems like it might be close but i can't quite figure it out
+			barClone.transform.RotateAround(Vector3.zero, Vector3.up, (Mathf.Atan2(yPos, xPos) * 180.0f / 3.1415926535f));
 
 			// increase angle by an additive and multiplicative amount
 			angle = (angle + angleAdd) * angleMult;
