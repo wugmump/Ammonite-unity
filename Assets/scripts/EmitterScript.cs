@@ -12,7 +12,11 @@ public class EmitterScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+
+
+
+		{
 		if (Input.GetMouseButton (0)) {
 			// make a ball
 			var variance = (float) (Random.value - .5);

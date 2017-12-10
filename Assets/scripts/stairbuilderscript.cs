@@ -41,10 +41,6 @@ public class stairbuilderscript : MonoBehaviour {
 			var barSizeY = n * (barSizeYMax - barSizeYMin) / 37 + barSizeYMin;
 
 			// create bar
-			// *** change these routine names for Unity
-			//var aRect = CreateRectPrism(-barSizeX / 2, -barSizeY / 2, barSizeX / 2, barSizeY / 2, barSizeZ);
-			// NOTE TO ERIC: WHY DIVIDE X AND Y /2?
-
 			GameObject barClone = Instantiate(bar);
 			barClone.transform.localScale = new Vector3 (barSizeX, barSizeY, barSizeZ);
 
