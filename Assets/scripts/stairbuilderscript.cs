@@ -24,8 +24,12 @@ public class stairbuilderscript : MonoBehaviour {
 	// *** adjust scaleFactor to scale from "units" to whatever size you need it to be
 	public const float scaleFactor = 20;
 
+
 	// Use this for initialization
 	void Start () {
+
+		//here's the blue ones
+
 		// init x, y, z and angle
 		float xPos = 0;
 		float yPos = 0;
@@ -42,13 +46,19 @@ public class stairbuilderscript : MonoBehaviour {
 
 			// create bar
 			GameObject barClone = Instantiate(bar);
+
+			// set the color
+			Color myColor = new Vector4 (.5f, (n/37.0f), .5f, 1.0f);
+			barClone.GetComponent<Renderer>().material.color = myColor;
+
+			// resize bar
 			barClone.transform.localScale = new Vector3 (barSizeX, barSizeY, barSizeZ);
 
 			// move the bar to this x,y,z location (if it Unity creates it at 0,0,0)
 			barClone.transform.localPosition = new Vector3(xPos * scaleFactor, yPos * scaleFactor, zPos * scaleFactor);
 
 			// *** you may need to change the rotation plane
-			barClone.transform.Rotate(0.0f, (Mathf.Atan2(yPos, xPos) * 180.0f / 3.1415926535f), 0.0f,  Space.Self);
+			barClone.transform.Rotate(0.0f, (Mathf.Atan2(yPos, xPos) * 180.0f / 3.1415926535f), 0.0f,  Space.World);
 
 			// increase angle by an additive and multiplicative amount
 			angle = (angle + angleAdd) * angleMult;
