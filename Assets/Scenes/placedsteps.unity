@@ -185,6 +185,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1513453503}
+  - component: {fileID: 1513453504}
   m_Layer: 0
   m_Name: stairbuilder
   m_TagString: Untagged
@@ -205,6 +206,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1513453504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1513453502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adff33619b79046f9aa10685986e5b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bar: {fileID: 1319389305934608, guid: 55a4d766aca7a4b9781568bc7fe434e3, type: 2}
+  barSizeX: 1.75
+  barSizeYMin: 6
+  barSizeYMax: 18
+  barSizeZ: 0.75
+  angleAdd: 0.57
+  angleMult: 0.97
+  zOffset: -0.1
 --- !u!1 &1527518470
 GameObject:
   m_ObjectHideFlags: 0
