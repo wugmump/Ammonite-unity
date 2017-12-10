@@ -35,6 +35,7 @@ public class stairbuilderscript : MonoBehaviour {
 		// generate 37 bars
 		for (int n = 0; n < 37; n++) {
 
+			// stupid comment insert for josh-experimental
 
 			// compute bar length based on bar # (e.g ranging in length from barSizeYMin to barSizeYMax units)
 			var barSizeY = n * (barSizeYMax - barSizeYMin) / 37 + barSizeYMin;
