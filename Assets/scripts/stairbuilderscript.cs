@@ -11,15 +11,15 @@ public class stairbuilderscript : MonoBehaviour {
 
 	// bar w,l,h
 	public float barSizeX = 15f;
-	public float barSizeYMin = 6f;
-	public float barSizeYMax = 18f;
-	public float barSizeZ = 0.75f;
+	public float barSizeZMin = 6f;
+	public float barSizeZMax = 18f;
+	public float barSizeY = 0.75f;
 
 	// various factors/coefficients
 	// *** I will likely adjust these, but they're close
 	public float angleAdd = 0.57f;
 	public float angleMult = 0.97f;
-	public float zOffset = -0.1f;
+	public float yOffset = -0.1f;
 
 	// *** adjust scaleFactor to scale from "units" to whatever size you need it to be
 	public const float scaleFactor = 20;
@@ -38,7 +38,7 @@ public class stairbuilderscript : MonoBehaviour {
 			// stupid comment insert for josh-experimental
 
 			// compute bar length based on bar # (e.g ranging in length from barSizeYMin to barSizeYMax units)
-			var barSizeY = n * (barSizeYMax - barSizeYMin) / 37 + barSizeYMin;
+			var barSizeZ = n * (barSizeZMax - barSizeZMin) / 37 + barSizeZMin;
 
 			// create bar
 			GameObject barClone = Instantiate(bar);
@@ -48,17 +48,17 @@ public class stairbuilderscript : MonoBehaviour {
 			barClone.transform.localPosition = new Vector3(xPos * scaleFactor, yPos * scaleFactor, zPos * scaleFactor);
 
 			// *** you may need to change the rotation plane
-			barClone.transform.Rotate(0.0f, 0.0f, (Mathf.Atan2(yPos, xPos) * 180.0f / 3.1415926535f), Space.Self);
+			barClone.transform.Rotate(0.0f, (Mathf.Atan2(yPos, xPos) * 180.0f / 3.1415926535f), 0.0f,  Space.Self);
 
 			// increase angle by an additive and multiplicative amount
 			angle = (angle + angleAdd) * angleMult;
 
 			// move one unit of distance from last point, in the direction of angle
 			xPos += Mathf.Cos(angle);
-			yPos += Mathf.Sin(angle);
+			zPos += Mathf.Sin(angle);
 
 			// increase z by offset
-			zPos += zOffset;
+			yPos += yOffset;
 		}
 	}
 }
