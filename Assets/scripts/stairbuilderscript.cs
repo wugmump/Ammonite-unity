@@ -10,7 +10,7 @@ public class stairbuilderscript : MonoBehaviour {
 	public GameObject bar;
 
 	// bar w,l,h
-	public float barSizeX = 1.75f;
+	public float barSizeX = 15f;
 	public float barSizeYMin = 6f;
 	public float barSizeYMax = 18f;
 	public float barSizeZ = 0.75f;
