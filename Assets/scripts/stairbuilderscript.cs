@@ -3,7 +3,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
-// *** may need other libraries (such as a math library) - not sure
+//THIS SHOULD BE A GOOD THING NOW
 
 public class stairbuilderscript : MonoBehaviour {
 	// this is the prefab for the objects created within the loop
