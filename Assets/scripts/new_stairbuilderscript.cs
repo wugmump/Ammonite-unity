@@ -35,9 +35,14 @@
 	}
 */
 
+// code starts here
+using UnityEngine;
+using System;
+using System.Collections;
+
 public class SpiralArray {
 	// coordinate index names
-	public enum Coord {x = 0, y, z, length, rotation};
+	public enum Coord {x = 0, y, z, length, rotation, enumLen};	// enumLen is a hack due to C#'s ridiculous enum syntax
 	
 	// holds coordinate set, generated when SpiralArray is instantiated with a set of parameters
 	private float[,] coords;
@@ -69,21 +74,24 @@ public class SpiralArray {
 	}
 	
 	public float get(int n, Coord c) {
-		return coords[n][c];
+		return coords[n, (int) c];
 	}
 	
 	// implementation details
 	private float sidesToAngle(float a, float b, float c) {
-		return Mathf.acos((a * a + b * b - c * c) / (2.0f * a * b));
+		return Mathf.Acos((a * a + b * b - c * c) / (2.0f * a * b));
 	}
-	
+
 	private float[] polarToRect(float radius, float angle) {
-		return new float[2](radius * Mathf.cos(angle), radius * Mathf.sin(angle));
+		float[] xy = new float[2];
+		xy[0] = radius * Mathf.Cos(angle);
+		xy[1] = radius * Mathf.Sin(angle);
+		return xy;
 	}
 
 	private float[,] computeSpiral() {
 		// allocate 2d array
-		float[,] spiral = new float[numBars, 5];
+		float[,] spiral = new float[numBars, (int) Coord.enumLen];
 		
 		// init outer bounds of spiral for normalization
 		float left = 0.0f;
@@ -95,36 +103,36 @@ public class SpiralArray {
 		float rN = rAdd;
 		float rNPlus1 = rN + rAdd;
 		float thetaN = 0.0f;
-		float zN = 1.0;
+		float zN = 1.0f;
 		
 		for (int n = 0; n < 37; n++) {
 			// get x, y from rN, thetaN
 			float[] xy = polarToRect(rN, thetaN);
-			spiral[n][Coord.x] = xy[0];
-			spiral[n][Coord.y] = xy[1];
+			spiral[n, (int) Coord.x] = xy[0];
+			spiral[n, (int) Coord.y] = xy[1];
 			
 			// set zN
-			spiral[n][Coord.z] = zN;
+			spiral[n, (int) Coord.z] = zN;
 			
 			// compute bar length based on bar number, ranging from barLengthMin to barLengthMax
-			spiral[n][Coord.length] = n * (barLengthMax - barLengthMin) / numBars + barLengthMin;
+			spiral[n, (int) Coord.length] = n * (barLengthMax - barLengthMin) / numBars + barLengthMin;
 			
 			// rotation is perpendicular to theta
-			spiral[n][Coord.rotation] = thetaN + Mathf.PI / 2;	// rotation is perpendicular to theta
+			spiral[n, (int) Coord.rotation] = thetaN + Mathf.PI / 2;	// rotation is perpendicular to theta
 						
 			// record bounding maxima
-			if (spiral[n][Coord.x] < left) {
-				left = spiral[n][Coord.x];
+			if (spiral[n, (int) Coord.x] < left) {
+				left = spiral[n, (int) Coord.x];
 			}
-			else if (spiral[n][Coord.x] > right) {
-				right = spiral[n][Coord.x];
+			else if (spiral[n, (int) Coord.x] > right) {
+				right = spiral[n, (int) Coord.x];
 			}
 			
-			if (spiral[n][Coord.y] < bottom) {
-				bottom = spiral[n][Coord.y];
+			if (spiral[n, (int) Coord.y] < bottom) {
+				bottom = spiral[n, (int) Coord.y];
 			}
-			else if (spiral[n][Coord.y] > top) {
-				top = spiral[n][Coord.y];
+			else if (spiral[n, (int) Coord.y] > top) {
+				top = spiral[n, (int) Coord.y];
 			}
 			
 			// update accumulated rN, thetaN, zN
@@ -142,8 +150,9 @@ public class SpiralArray {
 		}
 		
 		// set normalizer to furthest outlying boundary of (left, right, top, bottom)
-		width = right - left;
-		height = top - bottom;
+		float width = right - left;
+		float height = top - bottom;
+		float norm;
 		if (width > height) {
 			if (right > -left) {
 				norm = right;
@@ -162,9 +171,9 @@ public class SpiralArray {
 		}
 		
 		// normalize coordinates so all points fit within a 2 x 2 rectangle centered on 0, 0 i.e. bounded by -1 and +1 in both x and y direction
-		for (int n = 0; n < numPoles; n++) {
-			spiral[n][Coord.x] /= norm;
-			spiral[n][Coord.y] /= norm;
+		for (int n = 0; n < numBars; n++) {
+			spiral[n, (int) Coord.x] /= norm;
+			spiral[n, (int) Coord.y] /= norm;
 		}	
 		
 		// return 2d array with 1st dimension n, 2nd dimension the set of enum Coord
