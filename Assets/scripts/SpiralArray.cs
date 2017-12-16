@@ -9,19 +9,22 @@
 	const float barSep = 0.035f;
 	const float rAdd = 0.019667f;
 	const float rMult = 0.90442f;
-	const float barLengthMin = 6.0f;
-	const float barLengthMax = 18.0f;
+	const float lengthMin = 0.3333;
+	const float width = 0.1;
+	const float depth = 0.04;
 	const float zSep = 1f / (float) numBars;
+
+	
 	
 	// instantiating a SpiralArray generates a spiral with using these coefficients
-	SpiralArray spiral = new SpiralArray(numBars, barSep, rAdd, rMult, barLengthMin, barLengthMax, zSep);
+	SpiralArray spiral = new SpiralArray(numBars, barSep, rAdd, rMult, lengthMin, width, depth, zSep);
 	
 	// NOTE: 0th pole is no longer at (0, 0)
 	// It is one rAdd distance from (0, 0) in the theta = 0 (0 degrees) direction.
 	// ALSO NOTE: My bars are perpendicular to a line from 0, 0 to each one's xy coordinate
 	// this is 90 degrees rotation from yours, which we'll have to discuss and resolve
 	
-	// now you can get each coordinate set (x, y, z, length, rotation)
+	// now you can get each coordinate set (x, y, z, length, width, depth, rotation)
 	for (int n = 0; n < spiral.length(); n++) {
 		// access values like this
 		// you will need to flip coordinates from Eric space to Unity space
@@ -29,6 +32,8 @@
 		float y = spiral.get(n, SpiralArray.Coord.y);
 		float z = spiral.get(n, SpiralArray.Coord.z);
 		float length = spiral.get(n, SpiralArray.Coord.length);
+		float width = spiral.get(n, SpiralArray.Coord.width);
+		float depth = spiral.get(n, SpiralArray.Coord.depth);
 		float rotation = spiral.get(n, SpiralArray.Coord.rotation);
 		
 		// do your thing
@@ -42,7 +47,7 @@ using System.Collections;
 
 public class SpiralArray {
 	// coordinate index names
-	public enum Coord {x = 0, y, z, length, rotation, enumLen};	// enumLen is a hack due to C#'s ridiculous enum syntax
+	public enum Coord {x = 0, y, z, length, width, depth, rotation, enumLen};	// enumLen is a hack due to C#'s ridiculous enum syntax
 	
 	// holds coordinate set, generated when SpiralArray is instantiated with a set of parameters
 	private float[,] coords;
@@ -52,18 +57,21 @@ public class SpiralArray {
 	private float barSep;
 	private float rAdd;
 	private float rMult;
-	private float barLengthMin;
-	private float barLengthMax;
+	private float lengthMin;
+	private const float lengthMax = 1.0f;
+	private float width;
+	private float depth;
 	private float zSep;
-	
+
 	// spiral is computed upon construction
-	public SpiralArray(int numBars, float barSep, float rAdd, float rMult, float barLengthMin, float barLengthMax, float zSep) {
+	public SpiralArray(int numBars, float barSep, float rAdd, float rMult, float lengthMin, float width, float depth, float zSep) {
 		this.numBars = numBars;
 		this.barSep = barSep;
 		this.rAdd = rAdd;
 		this.rMult = rMult;
-		this.barLengthMin = barLengthMin;
-		this.barLengthMax = barLengthMax;
+		this.lengthMin = lengthMin;
+		this.width = width;
+		this.depth = depth;
 		this.zSep = zSep;
 		coords = computeSpiral();
 	}
@@ -114,9 +122,12 @@ public class SpiralArray {
 			// set zN
 			spiral[n, (int) Coord.z] = zN;
 			
-			// compute bar length based on bar number, ranging from barLengthMin to barLengthMax
-			spiral[n, (int) Coord.length] = n * (barLengthMax - barLengthMin) / numBars + barLengthMin;
-			
+			// compute bar length based on bar number, ranging from lengthMin to lengthMax
+			spiral[n, (int) Coord.length] = n * (lengthMax - lengthMin) / numBars + lengthMin;
+			// set width and depth (which are constant for now)
+			spiral[n, (int) Coord.width] = width;
+			spiral[n, (int) Coord.depth] = depth;
+									
 			// rotation is perpendicular to theta
 			spiral[n, (int) Coord.rotation] = thetaN + Mathf.PI / 2;	// rotation is perpendicular to theta
 						
@@ -150,10 +161,8 @@ public class SpiralArray {
 		}
 		
 		// set normalizer to furthest outlying boundary of (left, right, top, bottom)
-		float width = right - left;
-		float height = top - bottom;
 		float norm;
-		if (width > height) {
+		if (right - left > top - bottom) {
 			if (right > -left) {
 				norm = right;
 			}
