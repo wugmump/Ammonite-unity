@@ -5,19 +5,19 @@
 	// put this in your code
 
 	// these are the coefficients for my spiral
-	const int numBars = 37;
-	const float barSep = 0.035f;
-	const float rAdd = 0.019667f;
-	const float rMult = 0.90442f;
-	const float lengthMin = 0.3333;
-	const float width = 0.1;
-	const float depth = 0.04;
-	const float zSep = 1f / (float) numBars;
+	const int pNumBars = 37;
+	const float pBarSep = 0.035f;
+	const float pRAdd = 0.019667f;
+	const float pRMult = 0.90442f;
+	const float pLengthMin = 0.3333f;
+	const float pWidth = 0.1f;
+	const float pDepth = 0.04f;
+	const float pZSep = 1f / (float) pNumBars;
 
 	
 	
 	// instantiating a SpiralArray generates a spiral with using these coefficients
-	SpiralArray spiral = new SpiralArray(numBars, barSep, rAdd, rMult, lengthMin, width, depth, zSep);
+	SpiralArray spiral = new SpiralArray(pNumBars, pBarSep, pRAdd, pRMult, pLengthMin, pWidth, pDepth, pZSep);
 	
 	// NOTE: 0th pole is no longer at (0, 0)
 	// It is one rAdd distance from (0, 0) in the theta = 0 (0 degrees) direction.
