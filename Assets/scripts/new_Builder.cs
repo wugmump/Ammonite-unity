@@ -7,7 +7,7 @@ public class new_Builder : MonoBehaviour {
 	// these are the coefficients for my spiral
 	const int pNumBars = 37;
 	const float pBarSep = 0.035f;
-	const float pRAdd = 0.019667f;
+	const float pRAdd = 0.019667f; 
 	const float pRMult = 0.90442f;
 	const float pLengthMin = 0.3333f;
 	const float pWidth = 0.1f;
