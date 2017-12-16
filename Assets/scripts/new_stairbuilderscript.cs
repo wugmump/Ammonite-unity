@@ -83,7 +83,7 @@ public class SpiralArray {
 
 	private float[,] computeSpiral() {
 		// allocate 2d array
-		float spiral[,] = new float[numBars, 5];
+		float[,] spiral = new float[numBars, 5];
 		
 		// init outer bounds of spiral for normalization
 		float left = 0.0f;
