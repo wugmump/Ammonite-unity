@@ -69,15 +69,15 @@ public class SpiralArray {
 	}
 	
 	public float get(int n, Coord c) {
-		return coords[n][c]
+		return coords[n][c];
 	}
 	
 	// implementation details
-	private float sidesToAngle(a, b, c) {
+	private float sidesToAngle(float a, float b, float c) {
 		return Mathf.acos((a * a + b * b - c * c) / (2.0f * a * b));
 	}
 	
-	private float[] polarToRect(radius, angle) {
+	private float[] polarToRect(float radius, float angle) {
 		return new float[2](radius * Mathf.cos(angle), radius * Mathf.sin(angle));
 	}
 
