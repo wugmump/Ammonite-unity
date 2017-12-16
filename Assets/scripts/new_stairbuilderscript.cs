@@ -40,7 +40,7 @@ public class SpiralArray {
 	public enum Coord {x = 0, y, z, length, rotation};
 	
 	// holds coordinate set, generated when SpiralArray is instantiated with a set of parameters
-	private float coords[,];
+	private float[,] coords;
 
 	// parameters to generate spirals
 	private int numBars;
