@@ -12,7 +12,7 @@ public class new_Builder : MonoBehaviour {
 	const float pLengthMin = 0.3333f;
 	const float pWidth = 0.3f;
 	const float pDepth = 0.04f;
-	const float pZSep = 4f * 1f / (float) pNumBars;
+	const float pZSep = 4f * 1f / (float) pNumBars; 
 
 
 	// instantiating a SpiralArray generates a spiral with using these coefficients
