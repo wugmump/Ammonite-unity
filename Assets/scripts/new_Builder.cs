@@ -10,7 +10,7 @@ public class new_Builder : MonoBehaviour {
 	const float pRAdd = 0.019667f; 
 	const float pRMult = 0.90442f;
 	const float pLengthMin = 0.3333f;
-	const float pWidth = 0.1f;
+	const float pWidth = 0.3f;
 	const float pDepth = 0.04f;
 	const float pZSep = 4f * 1f / (float) pNumBars;
 
@@ -20,6 +20,7 @@ public class new_Builder : MonoBehaviour {
 
 	// here's the prefab
 	public GameObject step;
+
 
 	// Use this for initialization
 	void Start () {
