@@ -42,7 +42,8 @@ public class new_Builder : MonoBehaviour {
 			// set prefab transforms
 			stepClone.transform.localPosition = new Vector3(x,y,z);
 			stepClone.transform.localScale = new Vector3 (length,depth,width);
-			stepClone.transform.RotateAround(Vector3.zero, Vector3.forward, rotationDegrees + 90.0f);
+			//stepClone.transform.RotateAround(Vector3.zero, Vector3.forward, (rotationDegrees * 2f) + 90.0f);
+			stepClone.transform.Rotate(new Vector3(0f, rotationDegrees + 90.0f, 0f));
 			//stepClone.transform.RotateAround(Vector3.zero, Vector3.forward, -90);
 
 			Color myColor = Color.HSVToRGB((float) n / (float) pNumBars, 0.7f, 1.0f);
