@@ -82,7 +82,15 @@ public class SpiralArray {
 	}
 	
 	public float get(int n, Coord c) {
-		return coords[n, (int) c];
+		if (c == Coord.y) {
+			return coords[n, (int) Coord.z];
+		} else if (c == Coord.z) {
+			return coords[n, (int) Coord.y];
+		} else if (c == Coord.rotation) {
+			return -coords[n, (int) Coord.rotation];
+		} else {
+			return coords[n, (int) c];
+		}
 	}
 	
 	// implementation details
