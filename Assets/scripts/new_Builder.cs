@@ -27,8 +27,8 @@ public class new_Builder : MonoBehaviour {
 			// access values like this
 			// you will need to flip coordinates from Eric space to Unity space
 			float x = spiral.get(n, SpiralArray.Coord.x);
-			float y = spiral.get(n, SpiralArray.Coord.y);
-			float z = spiral.get(n, SpiralArray.Coord.z);
+			float z = spiral.get(n, SpiralArray.Coord.y);
+			float y = spiral.get(n, SpiralArray.Coord.z);
 			float length = spiral.get(n, SpiralArray.Coord.length);
 			float rotation = spiral.get(n, SpiralArray.Coord.rotation);
 			float rotationDegrees = 360f * rotation / (2f * Mathf.PI);
@@ -43,7 +43,7 @@ public class new_Builder : MonoBehaviour {
 			stepClone.transform.localPosition = new Vector3(x,y,z);
 			stepClone.transform.localScale = new Vector3 (length,depth,width);
 			//stepClone.transform.RotateAround(Vector3.zero, Vector3.forward, (rotationDegrees * 2f) + 90.0f);
-			stepClone.transform.Rotate(new Vector3(0f, rotationDegrees + 90.0f, 0f));
+			stepClone.transform.Rotate(new Vector3(-rotationDegrees - 90.0f, 0f, -90.0f));
 			//stepClone.transform.RotateAround(Vector3.zero, Vector3.forward, -90);
 
 			Color myColor = Color.HSVToRGB((float) n / (float) pNumBars, 0.7f, 1.0f);
