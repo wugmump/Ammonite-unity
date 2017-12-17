@@ -19,8 +19,8 @@ public class EmitterScript : MonoBehaviour {
 		{
 		if (Input.GetMouseButton (0)) {
 			// make a ball
-			var variance = (float) (Random.value - 2.0f);
-			Instantiate(ball, new Vector3(variance, 37.0f, 0.0f), Quaternion.identity);
+
+			Instantiate(ball, new Vector3(0.0f, 1.2f, 0.1f), Quaternion.identity);
 		}
 	}
 }
