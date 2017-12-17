@@ -12,7 +12,7 @@ public class new_Builder : MonoBehaviour {
 	const float pLengthMin = 0.3333f;
 	const float pWidth = 0.1f;
 	const float pDepth = 0.04f;
-	const float pZSep = 2f * 1f / (float) pNumBars;
+	const float pZSep = 4f * 1f / (float) pNumBars;
 
 
 	// instantiating a SpiralArray generates a spiral with using these coefficients
@@ -23,14 +23,16 @@ public class new_Builder : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		for (int n = 1; n < spiral.length(); n++) {
+		for (int n = 0; n < spiral.length(); n++) {
 			// access values like this
 			// you will need to flip coordinates from Eric space to Unity space
 			float x = spiral.get(n, SpiralArray.Coord.x);
 			float y = spiral.get(n, SpiralArray.Coord.y);
 			float z = spiral.get(n, SpiralArray.Coord.z);
 			float length = spiral.get(n, SpiralArray.Coord.length);
-			float rotationDegrees = (spiral.get (n, SpiralArray.Coord.rotation) * 2 * Mathf.PI) + 90f;
+			float rotation = spiral.get(n, SpiralArray.Coord.rotation);
+			float rotationDegrees = 360f * rotation / (2f * Mathf.PI);
+			Debug.Log (rotationDegrees);
 			float width = spiral.get (n, SpiralArray.Coord.width);
 			float depth = spiral.get (n, SpiralArray.Coord.depth);
 
@@ -43,7 +45,7 @@ public class new_Builder : MonoBehaviour {
 			stepClone.transform.RotateAround(Vector3.zero, Vector3.forward, rotationDegrees);
 			//stepClone.transform.RotateAround(Vector3.zero, Vector3.forward, -90);
 
-			Color myColor = new Vector4 ( (float) n / (float) pNumBars,(float) n / (float) pNumBars, 1f, 1.0f);
+			Color myColor = new Vector4 ( (float) n / (float) pNumBars,(float) n / (float) pNumBars, 1.0f, 1.0f);
 			stepClone.GetComponent<Renderer>().material.color = myColor;
 
 				

@@ -124,13 +124,27 @@ public class SpiralArray {
 			
 			// compute bar length based on bar number, ranging from lengthMin to lengthMax
 			spiral[n, (int) Coord.length] = n * (lengthMax - lengthMin) / numBars + lengthMin;
+
 			// set width and depth (which are constant for now)
 			spiral[n, (int) Coord.width] = width;
 			spiral[n, (int) Coord.depth] = depth;
 									
-			// rotation is perpendicular to theta
-			spiral[n, (int) Coord.rotation] = thetaN + Mathf.PI / 2;	// rotation is perpendicular to theta
+			// rotation is theta
+			spiral[n, (int) Coord.rotation] = thetaN;
 						
+			// update accumulated rN, thetaN, zN
+
+			// increment theta such that bar separation is constant (barSep)
+			thetaN += sidesToAngle(rN, rNPlus1, barSep);
+
+			// set rN to next r, increase r by a multiplicative and additive factor
+			rN = rNPlus1;
+			rNPlus1 *= rMult;
+			rNPlus1 += rAdd;
+
+			// linearly decrement zN
+			zN -= zSep;
+
 			// record bounding maxima
 			if (spiral[n, (int) Coord.x] < left) {
 				left = spiral[n, (int) Coord.x];
@@ -145,19 +159,6 @@ public class SpiralArray {
 			else if (spiral[n, (int) Coord.y] > top) {
 				top = spiral[n, (int) Coord.y];
 			}
-			
-			// update accumulated rN, thetaN, zN
-
-			// increment theta such that bar separation is constant (barSep)
-			thetaN += sidesToAngle(rN, rNPlus1, barSep);
-			
-			// set rN to next r, increase r by a multiplicative and additive factor
-			rN = rNPlus1;
-			rNPlus1 *= rMult;
-			rNPlus1 += rAdd;
-			
-			// linearly decrement zN
-			zN -= zSep;
 		}
 		
 		// set normalizer to furthest outlying boundary of (left, right, top, bottom)
