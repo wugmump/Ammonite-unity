@@ -11,13 +11,13 @@ public class new_Builder : MonoBehaviour {
 	const float pRMult = 0.90442f;
 	const float pSizeMin = 0.3333f;
 	const float pSizeMax = 1.0f;
-	const float pZSep = 4f * 1f / (float) pNumBars;
+	const float pYSep = 4f * 1f / (float) pNumBars;
 
 	const float width = .3f;
 	const float depth = .04f;
 
 	// instantiating a SpiralArray generates a spiral with using these coefficients
-	SpiralArray spiral = new SpiralArray(pNumBars, pBarSep, pRAdd, pRMult, pSizeMin, pSizeMax, pZSep);
+	SpiralArray spiral = new SpiralArray(pNumBars, pBarSep, pRAdd, pRMult, pSizeMin, pSizeMax, pYSep);
 
 	// here's the prefab
 	public GameObject step;
