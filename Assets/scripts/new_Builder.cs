@@ -9,14 +9,15 @@ public class new_Builder : MonoBehaviour {
 	const float pBarSep = 0.035f;
 	const float pRAdd = 0.019667f; 
 	const float pRMult = 0.90442f;
-	const float pLengthMin = 0.3333f;
-	const float pWidth = 0.3f;
-	const float pDepth = 0.04f;
+	const float pSizeMin = 0.3333f;
+	const float pSizeMax = 1.0f;
 	const float pZSep = 4f * 1f / (float) pNumBars;
 
+	const float width = 0.1f;
+	const float depth = 0.04f;
 
 	// instantiating a SpiralArray generates a spiral with using these coefficients
-	SpiralArray spiral = new SpiralArray(pNumBars, pBarSep, pRAdd, pRMult, pLengthMin, pWidth, pDepth, pZSep);
+	SpiralArray spiral = new SpiralArray(pNumBars, pBarSep, pRAdd, pRMult, pSizeMin, pSizeMax, pZSep);
 
 	// here's the prefab
 	public GameObject step;
@@ -26,33 +27,26 @@ public class new_Builder : MonoBehaviour {
 	void Start () {
 		for (int n = 0; n < spiral.length(); n++) {
 			// access values like this
-			// you will need to flip coordinates from Eric space to Unity space
 			float x = spiral.get(n, SpiralArray.Coord.x);
 			float y = spiral.get(n, SpiralArray.Coord.y);
 			float z = spiral.get(n, SpiralArray.Coord.z);
-			float length = spiral.get(n, SpiralArray.Coord.length);
+			float size = spiral.get(n, SpiralArray.Coord.size);
 			float rotation = spiral.get(n, SpiralArray.Coord.rotation);
 			float rotationDegrees = 360f * rotation / (2f * Mathf.PI);
-			Debug.Log (rotationDegrees);
-			float width = spiral.get (n, SpiralArray.Coord.width);
-			float depth = spiral.get (n, SpiralArray.Coord.depth);
+			float width = 0.1f;
+			float depth = 0.04f;
 
 			// draw the prefab 
 			GameObject stepClone = Instantiate(step);
 
 			// set prefab transforms
-			stepClone.transform.localPosition = new Vector3(x,y,z);
-			stepClone.transform.localScale = new Vector3 (length,depth,width);
-			//stepClone.transform.RotateAround(Vector3.zero, Vector3.forward, (rotationDegrees * 2f) + 90.0f);
-			stepClone.transform.Rotate(new Vector3(0f, rotationDegrees + 90.0f, 0f));
-			//stepClone.transform.RotateAround(Vector3.zero, Vector3.forward, -90);
+			stepClone.transform.localPosition = new Vector3(x, y, z);
+			stepClone.transform.localScale = new Vector3(size, depth, width);
+			// steps are now tilted forward in x
+			stepClone.transform.Rotate(5f, rotationDegrees, 0f);
 
 			Color myColor = Color.HSVToRGB((float) n / (float) pNumBars, 0.7f, 1.0f);
-			//Color myColor = new Vector4 ( (float) n / (float) pNumBars,(float) n / (float) pNumBars, 1.0f, 1.0f);
 			stepClone.GetComponent<Renderer>().material.color = myColor;
-
-				
-		
 		}
 	}
 	
