@@ -37,6 +37,9 @@ public class new_Builder : MonoBehaviour {
 			// draw the prefab 
 			GameObject stepClone = Instantiate(step);
 
+			// label the step with its number (not working)
+			//stepClone.GetComponent<StepBehavior>().Init(n);
+
 			// set prefab transforms
 			stepClone.transform.localPosition = new Vector3(x, y, z);
 			stepClone.transform.localScale = new Vector3(size, depth, width);
