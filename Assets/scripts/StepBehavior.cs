@@ -16,7 +16,7 @@ public class StepBehavior : MonoBehaviour {
 		
 	}
 
-	int Init (int whichStep) {
+	public int setStepNumber (int whichStep) {
 	
 		// called by the new builder script when the step is generated
 		StepNum = whichStep;
