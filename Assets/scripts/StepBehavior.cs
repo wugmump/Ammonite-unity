@@ -45,7 +45,7 @@ public class StepBehavior : MonoBehaviour {
 
 	public void playNote() {
 
-		sendStr = Encoding.UTF8.GetBytes("note/" + StepNum);
+		sendStr = Encoding.UTF8.GetBytes("/step " + StepNum);
 		client.Send(sendStr, sendStr.Length, remoteEndPoint);
 	}
 }
