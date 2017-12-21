@@ -35,7 +35,13 @@ public class new_Builder : MonoBehaviour {
 			float rotationDegrees = 360f * rotation / (2f * Mathf.PI);
 
 			// draw the prefab 
+
+			// instantiate the step
 			GameObject stepClone = Instantiate(step);
+			stepClone.GetComponent<StepBehavior> ().setStepNumber (n);
+
+			// label the step with its number (not working)
+			//stepClone.GetComponent<StepBehavior>().Init(n);
 
 			// set prefab transforms
 			stepClone.transform.localPosition = new Vector3(x, y, z);
