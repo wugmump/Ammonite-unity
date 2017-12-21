@@ -18,7 +18,7 @@ public class ballFaller : MonoBehaviour {
 	void Start () {
 		Debug.Log("Sending packets");
 
-		remoteEndPoint = new IPEndPoint(IPAddress.Parse("10.10.10.103"), 6076);
+		remoteEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6076);
 		client = new UdpClient();
 
 		sendStr = new byte[256];
@@ -27,10 +27,10 @@ public class ballFaller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		var myNote = transform.position.y;
-		if (myNote >= 1) {
+		//if (myNote >= 1) {
 			sendStr = Encoding.UTF8.GetBytes("collision " + myNote);
 			client.Send(sendStr, sendStr.Length, remoteEndPoint);
-		}
+		//}
 
 
 		
